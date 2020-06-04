@@ -55,7 +55,7 @@ namespace Finel_Project
             try
             {
                 Finel_ProjectDataSetTableAdapters.EVENT_OWNERSTableAdapter user = new Finel_ProjectDataSetTableAdapters.EVENT_OWNERSTableAdapter();
-                Finel_ProjectDataSet.EVENT_OWNERSDataTable dt = user.GetDataByUserNameAndPassword(txtUserName.Text, txtPassword.Text);
+                Finel_ProjectDataSet.EVENT_OWNERSDataTable dt = user.GetDataByUserNameAndPassword(txtUserName.Text, txtPassword.Text);//קריאה לשיטה שמקבלת כארגומנטים שם משתמש וסיסמא ובודקת אם קיימים בבסיס נתונים
                 if(dt.Rows.Count==1)
                 {
                     EventSeatingManager.globalusername = txtUserName.Text;
