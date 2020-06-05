@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.OleDb; //Access
+using System.IO;
 
 namespace Finel_Project
 {
@@ -38,6 +39,8 @@ namespace Finel_Project
         {
             cmbGuestList.Visible = true;
             listTable.Visible = true;
+            btnAddToTable.Visible = true;
+            btnSaveTable.Visible = true;
             // הגדרת מחרוזת שמכילה את פקודת החיבור
             string strDb = @"Provider = Microsoft.ACE.OLEDB.12.0; Data Source = C:\Users\Public\Finel Project\Finel Project.accdb;" + "Persist Security Info=False";
             // יצירת חיבור חדש לבסיס הנתונים
@@ -147,6 +150,29 @@ namespace Finel_Project
             {
                 conn.Close();
             }
+        }
+
+        private void btnSaveTable_Click(object sender, EventArgs e)
+        {
+            rb8seats.Checked = false;
+            rb10seats.Checked = false;
+            rb12seats.Checked = false;
+
+            SaveFileDialog dlg = new SaveFileDialog();
+            if(dlg.ShowDialog()==DialogResult.OK)
+            {
+                StreamWriter writer = new StreamWriter(dlg.FileName);
+                for (int i = 0; i < listTable.Items.Count; i++)
+                {
+                    writer.WriteLine((string)listTable.Items[i]);
+                }
+                writer.Close();
+            }
+            listTable.Items.Clear();
+
+            dlg.Dispose();
+         
+
         }
     }
 }

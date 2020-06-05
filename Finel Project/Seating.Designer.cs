@@ -155,6 +155,7 @@
             this.btnAddToTable.TabIndex = 60;
             this.btnAddToTable.Text = "Add to table";
             this.btnAddToTable.UseVisualStyleBackColor = false;
+            this.btnAddToTable.Visible = false;
             this.btnAddToTable.Click += new System.EventHandler(this.btnAddToTable_Click);
             // 
             // listTable
@@ -177,6 +178,8 @@
             this.btnSaveTable.TabIndex = 62;
             this.btnSaveTable.Text = "Save Table";
             this.btnSaveTable.UseVisualStyleBackColor = false;
+            this.btnSaveTable.Visible = false;
+            this.btnSaveTable.Click += new System.EventHandler(this.btnSaveTable_Click);
             // 
             // btnOurRecommendation
             // 
@@ -205,7 +208,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(469, 879);
+            this.ClientSize = new System.Drawing.Size(469, 887);
             this.Controls.Add(this.lblRecommendation);
             this.Controls.Add(this.btnOurRecommendation);
             this.Controls.Add(this.btnSaveTable);
