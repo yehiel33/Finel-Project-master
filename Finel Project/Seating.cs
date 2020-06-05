@@ -36,56 +36,32 @@ namespace Finel_Project
 
         private void btnLoadGestList_Click(object sender, EventArgs e)
         {
+            // הגדרת מחרוזת שמכילה את פקודת החיבור
+            string strDb = @"Provider = Microsoft.ACE.OLEDB.12.0; Data Source = C:\Users\Public\Finel Project\Finel Project.accdb;" + "Persist Security Info=False";
+            // יצירת חיבור חדש לבסיס הנתונים
+            OleDbConnection conn = new OleDbConnection(strDb);
+            OleDbCommand cmd = new OleDbCommand("Select * From GUEST_LIST where [Event Owner]='" + EventSeatingManager.globalusername + "';", conn);
             try
             {
-                string strDb = @"Provider = Microsoft.ACE.OLEDB.12.0; Data Source = C:\Users\Public\Finel Project\Finel Project.accdb;" + "Persist Security Info=False";// הגדרת מחרוזת שמכילה את פקודת החיבור
-                OleDbConnection conn = new OleDbConnection(strDb);// יצירת חיבור חדש לבסיס הנתונים
-                conn.Open();//פתיחת החיבור
-                OleDbDataReader dr;//משתנה שיכיל את המידע הנשלף
-                OleDbCommand cmd = new OleDbCommand("Select [Guest First Name],[Guest Last Name] From GUEST_LIST where [Event Owner]=" + EventSeatingManager.globalusername);
-                dr = cmd.ExecuteReader(); // pointer
-                cmbGuestList.Items.Clear();
-                string namelist;
-
-                while (dr.Read())
+                conn.Open();
+                OleDbDataReader reader = cmd.ExecuteReader(); // הגדרת אובייקט קריאה
+                while (reader.Read())
                 {
-                    namelist = dr["namelist"].ToString();
-                    cmbGuestList.Items.Add(namelist);
+                    string fullguestname = reader["Guest First Name"].ToString() +" "+ reader["Guest Last Name"].ToString();
+                    cmbGuestList.Items.Add(fullguestname);
                 }
-                dr.Close();
-                conn.Close();
+                reader.Close();
             }
             catch (Exception err)
             {
                 MessageBox.Show(err.Message, "Errore", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            finally //תוספת אפשרית למבנה טריי וקאצ' מגדירה מה יקרה בכל מקרה
+            {
+                conn.Close();
+            }
 
-            /* try
-             {
-                 string strDb = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=college.accdb;" + "Persist Security Info=False";
-                 OleDbConnection conn = new OleDbConnection(strDb);
-                 conn.Open();
-                 OleDbDataReader dr;
-                 OleDbCommand cmd = new OleDbCommand("Select nameAcademic from Academics;", conn); //command sql
-                 dr = cmd.ExecuteReader(); // pointer 
-                 cmbAcademics.Items.Clear();
-                 string nameAcademic;
-
-                 // read rows 
-                 while (dr.Read())
-                 {
-                     nameAcademic = dr["nameAcademic"].ToString();
-                     cmbAcademics.Items.Add(nameAcademic);
-                 }
-                 dr.Close();
-                 conn.Close();
-
-             }
-             catch (Exception err)
-             {
-                 MessageBox.Show(err.Message, "College", MessageBoxButtons.OK, MessageBoxIcon.Error);
-             }
-             */
+            
         }
     }
 }
