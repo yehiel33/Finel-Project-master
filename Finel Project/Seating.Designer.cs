@@ -208,7 +208,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(469, 887);
+            this.ClientSize = new System.Drawing.Size(469, 921);
             this.Controls.Add(this.lblRecommendation);
             this.Controls.Add(this.btnOurRecommendation);
             this.Controls.Add(this.btnSaveTable);
